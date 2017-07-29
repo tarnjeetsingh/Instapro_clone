@@ -1,5 +1,5 @@
 from django import forms
-from models import instamodel
+from models import instamodel,PostModel
 
 class SignUpForm(forms.ModelForm):
   class Meta:
@@ -10,3 +10,8 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = instamodel
         fields = ['username', 'password']
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = PostModel
+        fields=['image', 'caption']

@@ -24,5 +24,25 @@ class SessionToken(models.Model):
     def create_token(self):
         self.session_token = uuid4()
 
+    def check_validation(request):
+        if request.COOKIES.get('session_token'):
+            session = SessionToken.objects.filter(session_token=request.COOKIES.get('session_token')).first()
+            if session:
+                return session.user
+        else:
+            return None
 
+class PostModel(models.Model):
+  user = models.ForeignKey(instamodel)
+  image = models.FileField(upload_to='user_images')
+  image_url = models.CharField(max_length=255)
+  caption = models.CharField(max_length=240)
+  created_on = models.DateTimeField(auto_now_add=True)
+  updated_on = models.DateTimeField(auto_now=True)
+
+class LikeModel(models.Model):
+    user = models.ForeignKey(instamodel)
+    post = models.ForeignKey(PostModel)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 

@@ -16,10 +16,12 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 
-from instapro.views import signup_view,login_view
+from instapro.views import signup_view,login_view, feed_view ,post_view
 
 urlpatterns = [
-    url(r'^login/', login_view),
-    url(r'^signup/', signup_view),
+    url('post/', post_view),
+    url('feed/', feed_view),
+    url(r'login/', login_view),
+    url('signup/', signup_view),
     url(r'^admin/', admin.site.urls)
 ]
